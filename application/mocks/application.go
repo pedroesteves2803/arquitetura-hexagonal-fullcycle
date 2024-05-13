@@ -5,9 +5,9 @@
 package mock_application
 
 import (
+	application "go-hexagonal/application"
 	reflect "reflect"
 
-	application "go-hexagonal/application"
 	gomock "github.com/golang/mock/gomock"
 )
 
@@ -15,11 +15,6 @@ import (
 type MockProductInterface struct {
 	ctrl     *gomock.Controller
 	recorder *MockProductInterfaceMockRecorder
-}
-
-// GetID implements application.ProductInterface.
-func (m *MockProductInterface) GetID() string {
-	panic("unimplemented")
 }
 
 // MockProductInterfaceMockRecorder is the mock recorder for MockProductInterface.
@@ -65,6 +60,20 @@ func (m *MockProductInterface) Enable() error {
 func (mr *MockProductInterfaceMockRecorder) Enable() *gomock.Call {
 	mr.mock.ctrl.T.Helper()
 	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "Enable", reflect.TypeOf((*MockProductInterface)(nil).Enable))
+}
+
+// GetID mocks base method.
+func (m *MockProductInterface) GetID() string {
+	m.ctrl.T.Helper()
+	ret := m.ctrl.Call(m, "GetID")
+	ret0, _ := ret[0].(string)
+	return ret0
+}
+
+// GetID indicates an expected call of GetID.
+func (mr *MockProductInterfaceMockRecorder) GetID() *gomock.Call {
+	mr.mock.ctrl.T.Helper()
+	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "GetID", reflect.TypeOf((*MockProductInterface)(nil).GetID))
 }
 
 // GetName mocks base method.
